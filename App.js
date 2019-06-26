@@ -24,6 +24,7 @@ const separateData = (data) => {
   checkData(dataArray);
 };
 
+// CHECK TO SEE IF CREATING NEW DRIVER OR NEW TRIP //
 const checkData = (dataArray) => {
   for(let i = 0; i < dataArray.length; i++) {
     if(dataArray[i][0] === 'Driver') {
@@ -32,6 +33,12 @@ const checkData = (dataArray) => {
       createTrip(dataArray[i]);
     };
   };
+};
+
+// CREATE NEW DRIVER AND PUSH INTO DRIVERS ARRAY //
+const createDriver = (name) => {
+  const driver = new Driver(name);
+  drivers.push(driver);
 };
 
 separateData(inputData);
