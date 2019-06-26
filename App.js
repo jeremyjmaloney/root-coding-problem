@@ -14,14 +14,24 @@ class Driver {
   };
 };
 
+// SEPARATE THE WORDS IN EACH LINE OF DATA //
 const separateData = (data) => {
   let dataArray = [];
   for(let i = 0; i < data.length; i++) {
     let line = data[i].split(' ');
     dataArray.push(line);
   };
-  console.log(dataArray);
-  // checkData(dataArray);
+  checkData(dataArray);
+};
+
+const checkData = (dataArray) => {
+  for(let i = 0; i < dataArray.length; i++) {
+    if(dataArray[i][0] === 'Driver') {
+      createDriver(dataArray[i][1]);
+    } else if (dataArray[i][0] === 'Trip') {
+      createTrip(dataArray[i]);
+    };
+  };
 };
 
 separateData(inputData);
