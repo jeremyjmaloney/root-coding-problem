@@ -5,13 +5,19 @@ let drivers = [];
 
 // CREATE THE DRIVER CLASS WITH ATTRIBUTES FOR NAME AND ARRAY OF TRIPS //
 class Driver {
-  constructor(name, trips) {
+  constructor(name, trips, miles, hours) {
     this.name = name;
     this.trips = trips || [];
+    this.totalMiles = miles || 0;
+    this.totalHours = hours || 0;
   };
   addTrip(newTrip) {
     this.trips = [...this.trips, newTrip];
   };
+  addMilesAndHours(miles, hours) {
+    this.totalMiles = this.totalMiles + miles;
+    this.totalHours = this.totalHours + hours;
+  }
 };
 
 // SEPARATE THE WORDS IN EACH LINE OF DATA //
@@ -33,32 +39,50 @@ const checkData = (dataArray) => {
       createTrip(dataArray[i]);
     };
   };
-  console.log(drivers[0].trips);
+  printReport();
 };
 
 // CREATE NEW DRIVER AND PUSH INTO DRIVERS ARRAY //
 const createDriver = (name) => {
-  const driver = new Driver(name);
-  drivers.push(driver);
+  // let driver = new Driver(name);
+  drivers.push(new Driver(name));
 };
 
+// ADD A NEW TRIP TO EXISTING DRIVER OBJECT //
 const createTrip = (tripData) => {
+  let person = '';
+  person = drivers.find(person => person.name === tripData[1]);
+  let index = '';
+  index = drivers.indexOf(person);
   let driverName = tripData[1];
   let startTime = tripData[2];
   let endTime = tripData[3];
-  let milesDriven = tripData[4];
+  let tripMiles = parseFloat(tripData[4]);
   let start = startTime.split(':');
   let end = endTime.split(':');
-  let totalHours = (((end[0] * 60) + end[1]) - ((start[0] * 60) + start[1])) / 60;
-  let mph = milesDriven / totalHours;
+  let tripHours = (((end[0] * 60) + end[1]) - ((start[0] * 60) + start[1])) / 60;
+  let mph = 0;
+  mph = tripMiles / tripHours;
   if(mph > 5 && mph < 100) {
-    let thisDriver = drivers.find(person => person.name === driverName);
-    thisDriver.addTrip({
-      startTime: startTime,
-      endTime: endTime,
-      milesDriven: milesDriven,
-      totalHours: totalHours
-    });
+    // drivers[index].addTrip({
+    //   startTime: startTime,
+    //   endTime: endTime,
+    //   tripMiles: tripMiles,
+    //   tripHours: tripHours
+    // });
+    drivers[index].addMilesAndHours(tripMiles, tripHours);
+  };
+  console.log(drivers[index]);
+};
+
+const printReport = () => {
+  let reportEntries = [];
+  for(let i = 0; i < drivers.length; i++){
+    let amph = 0;
+    let totalMiles = 0;
+    amph = Math.round(drivers[i].totalMiles / drivers[i].totalHours);
+    totalMiles = Math.round(drivers[i].totalMiles);
+    console.log(`${drivers[i].name}: ${totalMiles} miles @ ${amph} mph`);
   };
 };
 
