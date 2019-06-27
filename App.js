@@ -74,10 +74,17 @@ const createTrip = (tripData) => {
 const printReport = () => {
   let reportEntries = [];
   for(let i = 0; i < drivers.length; i++){
-    let amph = Math.round(drivers[i].totalMiles / drivers[i].totalHours);
-    let totalMiles = Math.round(drivers[i].totalMiles);
-    console.log(`${drivers[i].name}: ${totalMiles} miles @ ${amph} mph`);
+    if(drivers[i].totalHours > 0) {
+      let amph = Math.round(drivers[i].totalMiles / drivers[i].totalHours);
+      let totalMiles = Math.round(drivers[i].totalMiles);
+      reportEntries.push(`${drivers[i].name}: ${totalMiles} miles @ ${amph} mph`);
+    } else {
+      reportEntries.push(`${drivers[i].name}: ${drivers[i].totalMiles} miles`);
+    }
   };
+  console.log(reportEntries.sort(function(a, b) {
+    return a.totalMiles - b.totalMiles;
+  }));
 };
 
 separateData(inputData);
