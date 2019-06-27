@@ -82,9 +82,7 @@ const printReport = () => {
       reportEntries.push(`${drivers[i].name}: ${drivers[i].totalMiles} miles`);
     }
   };
-  console.log(reportEntries.sort(function(a, b) {
-    return a.totalMiles - b.totalMiles;
-  }));
+  console.log(reportEntries);
 };
 
 separateData(inputData);
