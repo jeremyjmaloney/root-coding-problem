@@ -39,7 +39,6 @@ const checkData = (dataArray) => {
       createTrip(dataArray[i]);
     };
   };
-  printReport();
 };
 
 // CREATE NEW DRIVER AND PUSH INTO DRIVERS ARRAY //
@@ -50,40 +49,36 @@ const createDriver = (name) => {
 
 // ADD A NEW TRIP TO EXISTING DRIVER OBJECT //
 const createTrip = (tripData) => {
-  let person = '';
-  person = drivers.find(person => person.name === tripData[1]);
-  let index = '';
-  index = drivers.indexOf(person);
   let driverName = tripData[1];
   let startTime = tripData[2];
   let endTime = tripData[3];
   let tripMiles = parseFloat(tripData[4]);
   let start = startTime.split(':');
   let end = endTime.split(':');
-  let tripHours = (((end[0] * 60) + end[1]) - ((start[0] * 60) + start[1])) / 60;
-  let mph = 0;
-  mph = tripMiles / tripHours;
+  let tripHours = (((parseFloat(end[0]) * 60) + parseFloat(end[1])) - ((parseFloat(start[0]) * 60) + parseFloat(start[1]))) / 60;
+  let mph = tripMiles / tripHours;
+  let person = drivers.find(person => person.name === driverName);
+  let index = drivers.indexOf(person);
+
   if(mph > 5 && mph < 100) {
-    // drivers[index].addTrip({
-    //   startTime: startTime,
-    //   endTime: endTime,
-    //   tripMiles: tripMiles,
-    //   tripHours: tripHours
-    // });
+    drivers[index].addTrip({
+      startTime: startTime,
+      endTime: endTime,
+      tripMiles: tripMiles,
+      tripHours: tripHours
+    });
     drivers[index].addMilesAndHours(tripMiles, tripHours);
   };
-  console.log(drivers[index]);
 };
 
 const printReport = () => {
   let reportEntries = [];
   for(let i = 0; i < drivers.length; i++){
-    let amph = 0;
-    let totalMiles = 0;
-    amph = Math.round(drivers[i].totalMiles / drivers[i].totalHours);
-    totalMiles = Math.round(drivers[i].totalMiles);
+    let amph = Math.round(drivers[i].totalMiles / drivers[i].totalHours);
+    let totalMiles = Math.round(drivers[i].totalMiles);
     console.log(`${drivers[i].name}: ${totalMiles} miles @ ${amph} mph`);
   };
 };
 
 separateData(inputData);
+printReport();
