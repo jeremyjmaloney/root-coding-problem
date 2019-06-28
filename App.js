@@ -3,7 +3,7 @@ const fs = require('fs');
 let inputData = fs.readFileSync('input.txt').toString().split('\n');
 let drivers = [];
 
-// CREATE THE DRIVER CLASS WITH ATTRIBUTES FOR NAME AND ARRAY OF TRIPS //
+// DRIVER CLASS WITH ATTRIBUTES FOR NAME, TRIPS, TOTAL MILES AND HOURS //
 class Driver {
   constructor(name, trips, miles, hours) {
     this.name = name;
@@ -43,12 +43,12 @@ const checkData = (dataArray) => {
 
 // CREATE NEW DRIVER AND PUSH INTO DRIVERS ARRAY //
 const createDriver = (name) => {
-  // let driver = new Driver(name);
   drivers.push(new Driver(name));
 };
 
 // ADD A NEW TRIP TO EXISTING DRIVER OBJECT //
 const createTrip = (tripData) => {
+  // SET VARIABLES FROM TRIPDATA //
   let driverName = tripData[1];
   let startTime = tripData[2];
   let endTime = tripData[3];
@@ -57,9 +57,12 @@ const createTrip = (tripData) => {
   let end = endTime.split(':');
   let tripHours = (((parseFloat(end[0]) * 60) + parseFloat(end[1])) - ((parseFloat(start[0]) * 60) + parseFloat(start[1]))) / 60;
   let mph = tripMiles / tripHours;
+
+  // FIND THE CORRECT DRIVER TO ADD TRIP TO //
   let person = drivers.find(person => person.name === driverName);
   let index = drivers.indexOf(person);
 
+  // ONLY ADD VALID TRIPS //
   if(mph > 5 && mph < 100) {
     drivers[index].addTrip({
       startTime: startTime,
@@ -73,8 +76,11 @@ const createTrip = (tripData) => {
 
 // SORT BY TOTAL MILES, ROUND MILES AND HOURS, PRINT EACH ENTRY //
 const printReport = () => {
+  // SORT BY TOTAL MILES //
   let reportEntries = drivers.slice();
   reportEntries.sort((driver1, driver2) => (driver1.totalMiles < driver2.totalMiles) ? 1 : -1);
+
+  // ROUND MILES AND HOURS AND PRINT EACH DRIVERS DETAILS //
   for(let i = 0; i < reportEntries.length; i++){
     if(reportEntries[i].totalHours > 0) {
       let amph = Math.round(reportEntries[i].totalMiles / reportEntries[i].totalHours);
@@ -86,5 +92,6 @@ const printReport = () => {
   };
 };
 
+// RUN THE APPLICATION //
 separateData(inputData);
 printReport();
