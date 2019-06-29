@@ -1,5 +1,12 @@
 # root-coding-problem
 
+## How To Run The Application
+
+Using command line, navigate to the directory that has the App.js file, and the input.txt file. In the command line type:
+```
+node App.js
+```
+
 ## Problem Statement
 
 1. Read in external input.txt file.
