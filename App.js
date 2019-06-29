@@ -82,7 +82,7 @@ const printReport = () => {
 
   // ROUND MILES AND HOURS AND PRINT EACH DRIVERS DETAILS //
   for(let i = 0; i < reportEntries.length; i++){
-    if(reportEntries[i].totalHours > 0) {
+    if(reportEntries[i].totalMiles > 0) {
       let amph = Math.round(reportEntries[i].totalMiles / reportEntries[i].totalHours);
       let totalMiles = Math.round(reportEntries[i].totalMiles);
       console.log(`${reportEntries[i].name}: ${totalMiles} miles @ ${amph} mph`);
