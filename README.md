@@ -9,8 +9,8 @@ node App.js
 
 ## Problem Statement
 
-1. Read in external input.txt file.
-2. Given the commands in the txt file, the app must either create a new. driver, or create a new trip that belongs to a driver.
+1. Read an external input.txt file.
+2. Given the commands in the txt file, the app must either create a new driver, or create a new trip that belongs to an existing driver.
 3. Discard any trips that average a speed of less than 5 mph or greater than 100 mph.
 4. Generate a report containing each driver with total miles driven and average speed. Sort the output by most miles driven to least. Round miles and miles per hour to the nearest integer.
 Example input:
@@ -56,21 +56,30 @@ Using NodeJS readFileSync to read the file, make it into a string, and separate 
 ### Step 2: Separate each line into separate words (separateData)
 Separate each word in each line, and push each separated line into an array, and pass it to be checked.
 ### Step 3: Checking the data (checkData)
-If the first word in the line is Driver, we want to make a new driver object
+If the first word in the line is Driver, we want to make a new driver object.
+
 If the first word in the line is Trip, we want to log a new trip for that driver.
 ### Step 4: Create a driver (createDriver)
 Using the JavaScript class, this creates a new driver that can have a name, an array of trips, total number of miles driven, and total hours of drive time.
+
 Push the new driver created into and array of drivers.
 ### Step 5: Create a trip (createTrip)
 Given the line of trip data, set variables for name, start time, end time, and trip miles.
+
 Split the start time and end time to separate hours and minutes. Multiply hours by 60 and add the minutes to get a total number of minutes. Subtract start minutes from end minutes to get total amount of minutes, and divide by 60 to get total amount of hours.
+
 Get the miles per hour by dividing the miles by the hours.
+
 Find the driver in the drivers array that the trip belongs to, and if the trip is a valid trip, use the Driver class function to add the trip to that specific driver.
+
 Add miles and hours to the drivers total miles and total hours using the Driver class function.
 ### Step 6: Print out the data (printReport)
 Make a copy of the drivers array and sort it based on the total miles driven by each driver in descending order.
+
 For each driver, get the average miles per hour and round it, and round the total number of miles driven.
+
 If a driver has more than 0 miles, print out a full statement with the drivers name, total miles traveled, and average miles per hour.
+
 If a driver has zero miles, only print out the driver name and 0 miles.
 
 ## Testing
