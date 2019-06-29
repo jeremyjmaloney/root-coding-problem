@@ -46,7 +46,10 @@ Bob: 0 miles
 
 * I chose to create a Driver class object because each driver would have multiple key value pairs of information to be stored. I also wanted to use the class object to be able to use class functions to add a trip, or add to the total miles and total hours.
 * I chose to store my data in arrays because of the built in array methods.
-* To keep things simple, I decided to create just one script that would go through multiple functions to read, process, and print the desired output data. The different function steps are listed below:
+* I chose to round the total miles and total hours until the very end to get the most accurate result.
+* I used descriptive variable names, proper naming conventions, and commented my code where necessary so it was easy to read for the next person.
+* To keep things simple, I decided to create just one script that would go through multiple functions to read, process, and print the desired output data.
+* I separated each step into different functions that were responsible for that one particular task. The different function steps are listed below:
 
 ### Step 1: Reading the input.txt file
 Using NodeJS readFileSync to read the file, make it into a string, and separate it into different lines.
@@ -69,3 +72,10 @@ Make a copy of the drivers array and sort it based on the total miles driven by 
 For each driver, get the average miles per hour and round it, and round the total number of miles driven.
 If a driver has more than 0 miles, print out a full statement with the drivers name, total miles traveled, and average miles per hour.
 If a driver has zero miles, only print out the driver name and 0 miles.
+
+## Testing
+
+I created additional test driver commands and trip commands to test the following:
+1. That invalid trips were being discarded.
+2. That drivers were being sorted correctly based on total number of miles driven.
+3. That total miles and average miles per hour were being rounded accurately.
