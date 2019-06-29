@@ -1,8 +1,9 @@
 # root-coding-problem
 
 ## Problem Statement
-1. Read in external input.txt file
-2. Given the commands in the txt file, the app must either create a new driver, or create a new trip that belongs to a driver.
+
+1. Read in external input.txt file.
+2. Given the commands in the txt file, the app must either create a new. driver, or create a new trip that belongs to a driver.
 3. Discard any trips that average a speed of less than 5 mph or greater than 100 mph.
 4. Generate a report containing each driver with total miles driven and average speed. Sort the output by most miles driven to least. Round miles and miles per hour to the nearest integer.
 Example input:
@@ -24,4 +25,12 @@ Dan: 39 miles @ 47 mph
 Bob: 0 miles
 ```
 
-## Technologies Used 
+## Technologies Used
+
+* JavaScript
+* NodeJS
+### I chose to solve this problem with JavaScript because:
+1. It is the language that I'm most familiar with.
+2. I like the built in JavaScript array methods.
+3. I like the JavaScript classes and class functions.
+4. JavaScript is used everywhere and I think it's good to demonstrate my knowledge of the language.
